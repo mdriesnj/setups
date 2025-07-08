@@ -3,7 +3,15 @@ Use Raspian
 add ipv6.disable=1 to /boot/firmware/cmdline.txt
 apt update 
 apt upgrade
-apt install nut vim wakeonlan
+apt install nut-server vim wakeonlan
+
+sudo nut-scanner -U
+
+vi /etc/nut/
+
+
+sudo raspi-config
 nmcli c m "Wired connection 1" ipv4.addresses 192.168.2.1/24 ipv4.method manual
 nmcli c m "Wired connection 1" +ipv4.routes "192.168.0.0/21 192.168.2.254"
+
 
