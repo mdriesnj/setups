@@ -1,0 +1,60 @@
+1. Install
+Post Install 
+https://community-scripts.github.io/ProxmoxVE/
+
+2. Enable PCI Passthru
+(Intel)
+cp /etc/default/grub /etc/default/grub.orig
+vi /etc/default/grub
+  GRUB_CMDLINE_LINUX_DEFAULT="quiet intel_iommu=on iommu=pt
+update-grub
+reboot
+#Test with GPU or NIC
+
+(AMD)
+
+2. vGPU setup
+Guides
+-https://gist.github.com/scyto/e4e3de35ee23fdb4ae5d5a3b85c16ed3
+-https://www.derekseaman.com/2024/07/proxmox-ve-8-2-windows-11-vgpu-vt-d-passthrough-with-intel-alder-lake.html
+apt update && apt install pve-headers-$(uname -r)
+apt install git sysfsutils dkms build-* unzip -y
+nano /etc/apt/sources.list
+apt update && apt install intel-media-va-driver-non-free intel-gpu-tools vainfo
+wget -r -nd -e robots=no -A '*.bin' --accept-regex '/plain/' https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/tree/i915/adlp_dmc.bin
+cp adlp_dmc.bin /lib/firmware/i915/
+cd ~
+git clone https://github.com/strongtz/i915-sriov-dkms.git
+cd i915-sriov-dkms
+nano dkms.conf
+cd ~
+mv i915-sriov-dkms/ /usr/src/i915-sriov-dkms-6.5
+dkms install --force -m i915-sriov-dkms -v 6.5
+cd /etc/default/
+ls
+cp grub /root/grub.passthrough
+nano grub
+nano grub
+update-grub
+update-initramfs -u
+echo "devices/pci0000:00/0000:00:02.0/sriov_numvfs = 2" > /etc/sysfs.conf
+reboot
+
+#Ubuntu Guest
+sudo apt install dkms build-* linux-headers-$(uname -r) linux-modules-extra-$(uname -r)
+wget https://github.com/strongtz/i915-sriov-dkms/releases/download/2025.01.22/i915-sriov-dkms_2025.01.22_amd64.deb
+sudo apt install ./i915-sriov-dkms_2025.01.22_amd64.deb
+sudo dkms status
+sudo shutdown now
+Mapp device in Proxmox GUI
+sudo spci -nnk
+sudo lspci -nnk
+
+3. Network setup
+Proxmox Management port Example
+physical -> brTrunk(VLAN Aware = Yes) -> vlanxxx (Assign IP information to this, if vlanxxx is dedicated to management will be used on other Guests.
+physical -> brTrunk -> vlanxxx -> LAN (Assign IP information to this, if LAN will be used on other Guests.
+physical -> brTrunk -> vlanxxx -> <NAME> (No IP needed) 
+
+
+
