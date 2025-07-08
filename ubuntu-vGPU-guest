@@ -1,0 +1,62 @@
+#Ubuntu Guest
+1. don't add vGPU yet
+sudo apt update
+sudo apt install
+sudo reboot
+
+sudo apt install dkms build-* linux-headers-$(uname -r) linux-modules-extra-$(uname -r)
+wget https://github.com/strongtz/i915-sriov-dkms/releases/download/2025.01.22/i915-sriov-dkms_2025.01.22_amd64.deb
+sudo apt install ./i915-sriov-dkms_2025.01.22_amd64.deb
+sudo dkms status
+sudo echo 'options i915 enable_guc=3' > /etc/modprobe.d/i915.conf
+sudo shutdown now
+
+2. Mapp device in Proxmox GUI and boot, verify
+sudo spci -nnk
+sudo lspci -nnk
+
+3.Configure static network
+/etc/netplan/99_config.yaml
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    ens18:
+      addresses:
+        - 10.11.0.1/24
+      routes:
+        - to: default
+          via: 10.11.0.254
+      nameservers:
+        search: [ digitaldiscord.org ]
+        addresses: [ 10.11.0.254 ]
+sudo netplan apply
+
+
+4. Install jellyfin 
+curl https://repo.jellyfin.org/install-debuntu.sh
+chmod a+x install-debuntu.sh 
+./install-debuntu.sh 
+
+#jellyfin Transcode path
+#/dev/dri/renderD128
+#enable codex
+#transcode path = /dev/shm
+
+5. Install plex
+echo deb https://downloads.plex.tv/repo/deb public main | sudo tee /etc/apt/sources.list.d/plexmediaserver.list
+curl https://downloads.plex.tv/plex-keys/PlexSign.key | sudo apt-key add -
+sudo apt install plexmediaserver
+
+6. Mount NAS NFS
+sudo apt install autofs 
+add /- /etc/auto.nfs before +auto.master to /etc/auto.master
+
+hx /etc/auto.nfs
+/MediaShare -fstype=nfs4 nas.digitaldiscord.org:/volume1/MediaShare
+
+hx /etc/autofs.conf
+timeout = 60
+
+
+
