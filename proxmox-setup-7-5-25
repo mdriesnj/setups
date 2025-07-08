@@ -40,16 +40,6 @@ update-initramfs -u
 echo "devices/pci0000:00/0000:00:02.0/sriov_numvfs = 2" > /etc/sysfs.conf
 reboot
 
-#Ubuntu Guest
-sudo apt install dkms build-* linux-headers-$(uname -r) linux-modules-extra-$(uname -r)
-wget https://github.com/strongtz/i915-sriov-dkms/releases/download/2025.01.22/i915-sriov-dkms_2025.01.22_amd64.deb
-sudo apt install ./i915-sriov-dkms_2025.01.22_amd64.deb
-sudo dkms status
-sudo shutdown now
-Mapp device in Proxmox GUI
-sudo spci -nnk
-sudo lspci -nnk
-
 3. Network setup
 Proxmox Management port Example
 physical -> brTrunk(VLAN Aware = Yes) -> vlanxxx (Assign IP information to this, if vlanxxx is dedicated to management will be used on other Guests.
