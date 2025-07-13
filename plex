@@ -1,0 +1,13 @@
+autofs 
+
+sudo apt install autofs
+
+/etc/autofs.conf
+timeout = 60
+dismount_interval = 60
+
+auto.master
+add /- /etc/auto.fs at end before +auto.master
+
+auto.nfs
+/MediaShare -fstype=nfs4 nas.digitaldiscord.org:/volume1/MediaShare
