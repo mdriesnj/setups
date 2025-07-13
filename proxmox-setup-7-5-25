@@ -46,5 +46,5 @@ physical -> brTrunk(VLAN Aware = Yes) -> vlanxxx (Assign IP information to this,
 physical -> brTrunk -> vlanxxx -> LAN (Assign IP information to this, if LAN will be used on other Guests.
 physical -> brTrunk -> vlanxxx -> <NAME> (No IP needed) 
 
-
+NOTE: intel_gpu_top only works on the host
 
