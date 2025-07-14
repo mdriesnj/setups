@@ -1,0 +1,11 @@
+For Suricata
+
+Two NICs same VLAN
+Requires a VIP on the fw in the source VLAN 
+
+sudo rc-update add staticroute 
+sudo vi /etc/config.d/staticroute
+  staticroute="net 10.10.0.101 netmask 255.255.255.255 dev eth1" 
+suddo rc-service staticroute restart 
+
+ping to confirm 
