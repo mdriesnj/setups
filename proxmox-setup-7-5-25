@@ -20,6 +20,14 @@ Guides
 apt update && apt install pve-headers-$(uname -r)
 apt install git sysfsutils dkms build-* unzip -y
 nano /etc/apt/sources.list
+-----------------------------
+#non-free firmwares
+deb http://deb.debian.org/debian bookworm non-free-firmware
+
+#non-free drivers and components
+deb http://deb.debian.org/debian bookworm non-free
+-----------------------------
+
 apt update && apt install intel-media-va-driver-non-free intel-gpu-tools vainfo
 wget -r -nd -e robots=no -A '*.bin' --accept-regex '/plain/' https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/tree/i915/adlp_dmc.bin
 cp adlp_dmc.bin /lib/firmware/i915/
@@ -27,14 +35,19 @@ cd ~
 git clone https://github.com/strongtz/i915-sriov-dkms.git
 cd i915-sriov-dkms
 nano dkms.conf
+-----------------------------
+PACKAGE_NAME="i915-sriov-dkms"
+PACKAGE_VERSION="6.5"
+-----------------------------
 cd ~
 mv i915-sriov-dkms/ /usr/src/i915-sriov-dkms-6.5
 dkms install --force -m i915-sriov-dkms -v 6.5
-cd /etc/default/
-ls
-cp grub /root/grub.passthrough
-nano grub
-#GRUB_CMDLINE_LINUX_DEFAULT="quiet intel_iommu=on iommu=pt i915.enable_guc=3 i915.max_vfs=2"
+
+cp /etc/default/grub /root/grub.passthrough
+nano /etc/default/grub
+----------------------------
+GRUB_CMDLINE_LINUX_DEFAULT="quiet intel_iommu=on iommu=pt i915.enable_guc=3 i915.max_vfs=2"
+----------------------------
 update-grub
 update-initramfs -u
 echo "devices/pci0000:00/0000:00:02.0/sriov_numvfs = 2" > /etc/sysfs.conf
