@@ -1,0 +1,4 @@
+http;//www.dd.int/setup/alpine.sh
+chmod a+x alpine.sh
+./alpine.sh
+
