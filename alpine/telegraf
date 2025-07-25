@@ -2,3 +2,10 @@ http;//www.dd.int/setup/alpine.sh
 chmod a+x alpine.sh
 ./alpine.sh
 
+apk add lm-sensors telegraf
+
+cp telegraf.conf /etc/
+rc-update add telegraf
+reboot
+apk del qemu-guest-agent
+
