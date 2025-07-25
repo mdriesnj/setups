@@ -11,3 +11,4 @@ add /- /etc/auto.fs at end before +auto.master
 
 auto.nfs
 /MediaShare -fstype=nfs4 nas.digitaldiscord.org:/volume1/MediaShare
+
