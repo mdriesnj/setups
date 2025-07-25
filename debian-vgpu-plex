@@ -1,0 +1,9 @@
+do the usual 
+run debian setup script
+ansible 
+
+echo "deb http://deb.debian.org/debian bookworm-backports main contrib non-free" | tee /etc/apt/sources.list.d/bookworm-backports.list
+apt update
+apt install -t bookworm-backports linux-base
+apt install -t bookworm-backports linux-image-6.12.12+bpo-amd64
+  
