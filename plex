@@ -2,12 +2,15 @@ autofs
 
 sudo apt install autofs
 
+add to /etc/hosts
+<vip> nas.digitaldiscord.org 
+
 /etc/autofs.conf
 timeout = 60
 dismount_interval = 60
 
 auto.master
-add /- /etc/auto.fs at end before +auto.master
+add /- /etc/auto.nfs at end before +auto.master
 
 auto.nfs
 /MediaShare -fstype=nfs4 nas.digitaldiscord.org:/volume1/MediaShare
