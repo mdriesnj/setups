@@ -35,3 +35,8 @@ add /- /etc/auto.nfs at end before +auto.master
 auto.nfs
 /MediaShare -fstype=nfs4 nas.digitaldiscord.org:/volume1/MediaShare
 
+
+debian
+https://gist.github.com/azsde/e92b1f219712045636cc3f8581c4542b#file-readme-md
+6.12.30+bpo-amd64
+
