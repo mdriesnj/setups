@@ -42,6 +42,15 @@ wget -O /root/i915-sriov-dkms.deb https://github.com/strongtz/i915-sriov-dkms/re
 apt install ./i915-sriov-dkms.deb
 
 
+intel_gpu_top -d sys:/sys/devices/pci0000:00/0000:00:02.0 
+
+
+
+
+
+
+
+
 ---------------------------------------
 
 do the usual 
