@@ -1,4 +1,23 @@
 9/19
+-------------------------------------
+doas apt install autofs
+
+add to /etc/hosts
+<vip> nas.digitaldiscord.org 
+
+/etc/autofs.conf
+timeout = 60
+dismount_interval = 60
+
+auto.master
+add /- /etc/auto.nfs at end before +auto.master
+
+auto.nfs
+/MediaShare -fstype=nfs4 nas.digitaldiscord.org:/volume1/MediaShare
+----------------------------
+
+
+
 
 apt install dkms
 apt install build-\*
@@ -44,7 +63,7 @@ reboot
 
 autofs 
 
-sudo apt install autofs
+doas apt install autofs
 
 add to /etc/hosts
 <vip> nas.digitaldiscord.org 
