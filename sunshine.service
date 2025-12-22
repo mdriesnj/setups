@@ -1,0 +1,9 @@
+#Lives in ~/.config/systemd/user
+[Unit]
+Description=Syncthing
+
+[Service]
+ExecStart=/usr/bin/sunshine
+
+[Install]
+WantedBy=default.target
