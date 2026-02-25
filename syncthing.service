@@ -1,4 +1,5 @@
 #Lives in ~/.config/systemd/user
+#systemctl --user --now start syncthing
 [Unit]
 Description=Syncthing
 
