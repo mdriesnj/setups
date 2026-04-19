@@ -18,6 +18,7 @@ Guides
 #https://www.derekseaman.com/2024/07/proxmox-ve-8-2-windows-11-vgpu-vt-d-passthrough-with-intel-alder-lake.html
 
 apt update && apt install pve-headers-$(uname -r)
+apt update && apt install git sysfsutils pve-headers mokutil -y
 apt install git sysfsutils dkms build-* unzip -y
 nano /etc/apt/sources.list
 -----------------------------
