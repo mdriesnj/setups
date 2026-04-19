@@ -26,6 +26,7 @@ apt install dkms
 apt install build-\*
 apt install linux-headers-$(uname -r)
 apt install vainfo
+apt install intel-gpu-tools
 
 wget -O /root/i915-sriov-dkms.deb https://github.com/strongtz/i915-sriov-dkms/releases/download/2026.03.05/i915-sriov-dkms_2026.03.05_amd64.deb
 
