@@ -27,7 +27,7 @@ apt install build-\*
 apt install linux-headers-$(uname -r)
 apt install vainfo
 
-wget -O /root/i915-sriov-dkms.deb https://github.com/strongtz/i915-sriov-dkms/releases/download/2025.07.22/i915-sriov-dkms_2025.07.22_amd64.deb
+wget -O /root/i915-sriov-dkms.deb https://github.com/strongtz/i915-sriov-dkms/releases/download/2026.03.05/i915-sriov-dkms_2026.03.05_amd64.deb
 
 apt install /root/i915-sriov-dkms.deb
 
